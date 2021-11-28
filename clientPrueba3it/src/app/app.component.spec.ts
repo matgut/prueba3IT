@@ -1,31 +1,47 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NgForm } from '@angular/forms';
+import { Component } from '@angular/core';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule
+      ],
       declarations: [
         AppComponent
       ],
     }).compileComponents();
   });
 
-  it('should create the app', () => {
+  it('crear la app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
-  /*it(`should have as title 'clientPrueba3it'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('clientPrueba3it');
-  });*/
 
-  it('should render title', () => {
+
+  it('boton guardar deberia estar disable al cargar la app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('clientPrueba3it app is running!');
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('.btn btn-primary').disabled).toBeTruthy();
   });
+
+  it('formulario guarda datos', () => {
+    const testForm = <NgForm>{
+      value: {
+          email: "example@example.com",
+          typeMusic: "Rock"
+      }
+    };
+
+    ;
+    
+  });
+
+
 });
